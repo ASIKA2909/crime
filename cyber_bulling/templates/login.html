@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Twitter Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle, #1DA1F2 10%, #0d8ddb 90%);
+      background-image: url('https://upload.wikimedia.org/wikipedia/en/9/9f/Twitter_bird_logo_2012.svg');
+      background-repeat: repeat;
+      background-size: 100px;
+      opacity: 0.95;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: white;
+      border-radius: 10px;
+      padding: 40px 30px;
+      width: 350px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      animation: slide-in 0.6s ease-out;
+    }
+
+    @keyframes slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1DA1F2;
+    }
+
+    .error-msg {
+      text-align: center;
+      color: red;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      background: transparent;
+      transition: border 0.3s;
+    }
+
+    .input-group label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #aaa;
+      background-color: white;
+      padding: 0 5px;
+      pointer-events: none;
+      transition: 0.2s ease all;
+    }
+
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 8px;
+      font-size: 12px;
+      color: #1DA1F2;
+    }
+
+    .input-group input:focus {
+      border-color: #1DA1F2;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1DA1F2;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background-color: #0d8ddb;
+    }
+
+    .signup-text {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .signup-text a {
+      color: #1DA1F2;
+      text-decoration: none;
+    }
+
+    .twitter-icon {
+      font-size: 40px;
+      color: #1DA1F2;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="twitter-icon">
+      <i class="fab fa-twitter"></i>
+    </div>
+    <h2>Login to Twitter</h2>
+
+    {% if msg %}
+      <p class="error-msg">{{ msg }}</p>
+    {% endif %}
+
+    <form action="/login" method="POST">
+      <div class="input-group">
+        <input type="text" name="name" id="username" placeholder=" " required>
+        <label for="username">Email</label>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" id="password" placeholder=" " required>
+        <label for="password">Password</label>
+      </div>
+      <button type="submit">Login</button>
+      <div class="signup-text">
+        Don't have an account? <a href="/NewUser">Sign up</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    window.onload = function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          fetch('/store_location', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              lat: position.coords.latitude,
+              lon: position.coords.longitude
+            })
+          });
+        }, function (error) {
+          console.warn("Geolocation blocked or failed:", error.message);
+        });
+      } else {
+        console.warn("Geolocation is not supported by this browser.");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+    "test@example.com": {
+      "phone": "1234567890",
+      "password": "pbkdf2:sha256:260000$eFi0jA1WbqDJphMh$cf7de27a197c6895896a5f13816e314443865727b351354383a0e24480cf0e61",
+      "banned": false
+    },
+    "demo@example.com": {
+      "phone": "9876543210",
+      "password": "pbkdf2:sha256:260000$kRiB9fDU2kA5Mkfl$1a0c79c14dbb42b50898f835a707ea9a1a1f6807a04b64905aa1a448189d657f",
+      "banned": true
+    }
+  }
+  

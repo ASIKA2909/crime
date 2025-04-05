@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberbullying Awareness</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f0f0f0; /* Light background color */
+  }
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover; /* Ensure video covers the entire viewport */
+  }
+  .video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+  .container {
+    position: relative;
+    z-index: 1; /* Ensure content is above the video background */
+    max-width: 800px; /* Limit content width for better readability */
+    margin: 100px auto; /* Center content vertically and horizontally */
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for content */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  .tab {
+    overflow: hidden;
+    background-color: #fff; /* White background for tabs */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+  }
+  .tab button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: background-color 0.3s;
+    border-radius: 8px 8px 0 0;
+    font-size: 16px;
+  }
+  .tab button:hover {
+    background-color: #777;
+  }
+  .tab button.active {
+    background-color: #ccc;
+    color: #555; /* Adjusted text color for better visibility */
+  }
+  .tabcontent {
+    display: none;
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    background-color: #f9f9f9;
+    animation: fadeIn 1s;
+  }
+  .tabcontent.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  h3 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  ul li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  p {
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="video-background">
+  <video autoplay muted loop>
+    <source src="static/test.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="container">
+  <div class="tab">
+    <button class="tablinks active" onclick="openTab(event, 'what')">What is Cyberbullying?</button>
+    <button class="tablinks" onclick="openTab(event, 'types')">Types of Cyberbullying</button>
+    <button class="tablinks" onclick="openTab(event, 'helpline')">Cyberbullying Helpline</button>
+    <button class="tablinks" onclick="openTab(event, 'go-to')">Go To</button>
+  </div>
+
+  <div id="what" class="tabcontent active">
+    <h3>Cyberbullying</h3>
+    <ul>
+      <li>Cyberbullying involves using digital communication to harass, intimidate, or harm others.</li>
+      <li>It can occur through social media, texts, emails, and online forums.</li>
+      <li>Effects of cyberbullying can include emotional distress, social isolation, and even physical harm in extreme cases.</li>
+    </ul>
+  </div>
+
+  <div id="types" class="tabcontent">
+    <h3>Types of Cyberbullying</h3>
+    <ul>
+      <li>Harassment: Sending offensive messages or threats repeatedly.</li>
+      <li>Impersonation: Pretending to be someone else to damage their reputation.</li>
+      <li>Cyberstalking: Continuously following and harassing an individual online.</li>
+      <li>Outing: Sharing personal information or secrets about someone without their consent.</li>
+    </ul>
+  </div>
+
+  <div id="helpline" class="tabcontent">
+    <h3>Cyberbullying Helpline</h3>
+    <ul>
+      <li>If you are a victim of cyberbullying, you can contact local law enforcement or seek help from trusted adults.</li>
+      <li>There are helplines and support services available to provide assistance and guidance.</li>
+      <li>Take steps to protect yourself online and report cyberbullying incidents to the platform or service provider.</li>
+    </ul>
+  </div>
+
+  <div id="go-to" class="tabcontent">
+    <h3>Go To</h3>
+    <p>New user? <a href="/send">Check In</a></p>
+  </div>
+</div>
+
+<!-- Bootstrap Bundle with Popper and Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<script>
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+</body>
+</html>

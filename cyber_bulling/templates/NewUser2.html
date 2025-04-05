@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register with OTP - Twitter Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle, #1DA1F2 10%, #0d8ddb 90%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .register-box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .register-box h2 {
+      text-align: center;
+      color: #1DA1F2;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      background: transparent;
+    }
+
+    .input-group label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: white;
+      padding: 0 4px;
+      color: #aaa;
+      font-size: 14px;
+      pointer-events: none;
+      transition: 0.2s ease all;
+    }
+
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 8px;
+      font-size: 12px;
+      color: #1DA1F2;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1DA1F2;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #0d8ddb;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #1DA1F2;
+      text-decoration: none;
+    }
+
+    .error-msg {
+      color: red;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Register Account</h2>
+
+    {% if msg %}
+      <p class="error-msg">{{ msg }}</p>
+    {% endif %}
+
+    <form method="POST" action="/reg">
+      <div class="input-group">
+        <input type="text" name="first_name" id="first_name" placeholder=" " required>
+        <label for="first_name">First Name</label>
+      </div>
+
+      <div class="input-group">
+        <input type="date" name="dob" id="dob" placeholder=" " required>
+        <label for="dob">Date of Birth</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="password" id="password" placeholder=" " required>
+        <label for="password">Password</label>
+      </div>
+
+      <div class="input-group">
+        <input type="email" name="email" id="email" placeholder=" " required>
+        <label for="email">Email Address</label>
+      </div>
+
+      {% if otp_sent %}
+      <div class="input-group">
+        <input type="text" name="otp" id="otp" placeholder=" " required>
+        <label for="otp">Enter OTP</label>
+      </div>
+      {% endif %}
+
+      <button type="submit">{{ 'Verify OTP' if otp_sent else 'Send OTP' }}</button>
+
+      <div class="back-link">
+        Already have an account? <a href="/">Login</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

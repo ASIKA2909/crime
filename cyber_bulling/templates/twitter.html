@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #06141d;
+            font-family: Arial, sans-serif;
+        }
+
+        .tweet {
+            background-color: #06141d;
+        }
+
+        .in {
+            position: relative;
+        }
+
+        img {
+            position: absolute;
+            margin-top: -10px;
+            margin-left: -8px;
+            width: 1350px;
+        }
+
+        input {
+            position: absolute;
+            border-radius: 9px;
+            border: none;
+            outline: none;
+            background-color: #28343e;
+            color: #fff;
+            font-size: 20px;
+            top: 92px;
+            left: 430px;
+            width: 541px;
+            height: 52px;
+            padding-left: 10px;
+        }
+
+        button {
+            height: 45px;
+            position: absolute;
+            top: 161px;
+            left: 845px;
+            width: 130px;
+            border-radius: 23px;
+            border: none;
+            font-size: 16px;
+            background-color: #1da1f2;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .user {
+            position: absolute;
+            top: 133px;
+            left: 143px;
+            width: 78px;
+        }
+
+        .user1 {
+            position: absolute;
+            top: 97px;
+            left: 367px;
+            width: 60px;
+        }
+
+        a {
+            position: absolute;
+            top: 15px;
+            right: 75px;
+            width: 150px;
+            height: 31px;
+            background-color: #1da1f2;
+            border-radius: 2em;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            padding-top: 6px;
+            font-size: 19px;
+        }
+
+        label.username {
+            position: absolute;
+            width: 300px;
+            height: 25px;
+            background-color: #1b2730;
+            top: 215px;
+            left: 23px;
+            text-align: center;
+            color: #fff;
+            font-size: 22px;
+            border-radius: 5px;
+            padding: 4px 0;
+        }
+
+        .pop {
+            position: absolute;
+            top: 250px;
+            left: 452px;
+            width: 445px;
+            background-color: #9cd9ff;
+            border-radius: 10px;
+            color: #000;
+            padding: 20px 5px 35px;
+            font-size: 22px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <section class="tweet">
+        <div class="in">
+            <img src="{{ url_for('static', filename='img/bc.png') }}">
+            <img class="user" src="{{ url_for('static', filename='img/user.png') }}">
+            <img class="user1" src="{{ url_for('static', filename='img/user.png') }}">
+            <a href="/">Logout</a>
+
+            <label class="username">{{ session.get('name', 'User') }}</label>
+
+            {% if value %}
+            <label id="popup-message" class="pop" style="display: block;">{{ value }}</label>
+            {% endif %}
+
+            <form action="/send" method="POST">
+                <input type="text" name="msg" placeholder="What's happening?" autofocus>
+                <button id="{{ ty }}" type="submit">Tweet</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        var msg = document.getElementById("popup-message");
+        if (msg) {
+            let content = msg.textContent;
+
+            if (content.includes("thrice")) {
+                alert("🚫 Your account has been permanently banned due to repeated violations.");
+            } else if (content.includes("temporarily blocked until")) {
+                alert("⏳ " + content);
+            } else if (content.includes("twice")) {
+                alert("⚠️ Warning! You've used inappropriate language twice.");
+            } else if (content.includes("inappropriate language")) {
+                alert("⚠️ Please refrain from using inappropriate language.");
+            } else if (content.includes("Post Tweeted")) {
+                alert("✅ Post Tweeted");
+            }
+        }
+    </script>
+</body>
+</html>

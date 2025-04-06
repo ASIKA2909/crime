@@ -1,2 +1,2 @@
-web: gunicorn cyber_bulling.main:app
+web: gunicorn main:app
 
